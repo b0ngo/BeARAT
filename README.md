@@ -1,2 +1,4 @@
-# barat
-Be a Rat!
+# BeARat
+Be a RAT!
+
+Remote Access Tool as a client server model
