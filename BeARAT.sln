@@ -3,17 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "BeARAT\Server.csproj", "{2CFD7B70-EA95-481E-904F-CEC049FEA009}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A89E877A-DE1F-42DC-BE9B-7686A1983F40} = {A89E877A-DE1F-42DC-BE9B-7686A1983F40}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "BeARAT.Server\Server.csproj", "{2CFD7B70-EA95-481E-904F-CEC049FEA009}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "BeARAT-Client\Client.csproj", "{4C0FEDBC-D5E3-4A06-9AE2-543308939155}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A89E877A-DE1F-42DC-BE9B-7686A1983F40} = {A89E877A-DE1F-42DC-BE9B-7686A1983F40}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "BeARAT.Common\Common.csproj", "{A89E877A-DE1F-42DC-BE9B-7686A1983F40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "BeARATLib\Common.csproj", "{A89E877A-DE1F-42DC-BE9B-7686A1983F40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "BeARAT.Client\Client.csproj", "{4C0FEDBC-D5E3-4A06-9AE2-543308939155}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +19,14 @@ Global
 		{2CFD7B70-EA95-481E-904F-CEC049FEA009}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CFD7B70-EA95-481E-904F-CEC049FEA009}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CFD7B70-EA95-481E-904F-CEC049FEA009}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C0FEDBC-D5E3-4A06-9AE2-543308939155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C0FEDBC-D5E3-4A06-9AE2-543308939155}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C0FEDBC-D5E3-4A06-9AE2-543308939155}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C0FEDBC-D5E3-4A06-9AE2-543308939155}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A89E877A-DE1F-42DC-BE9B-7686A1983F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A89E877A-DE1F-42DC-BE9B-7686A1983F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A89E877A-DE1F-42DC-BE9B-7686A1983F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A89E877A-DE1F-42DC-BE9B-7686A1983F40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C0FEDBC-D5E3-4A06-9AE2-543308939155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C0FEDBC-D5E3-4A06-9AE2-543308939155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C0FEDBC-D5E3-4A06-9AE2-543308939155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C0FEDBC-D5E3-4A06-9AE2-543308939155}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
