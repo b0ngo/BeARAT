@@ -14,50 +14,58 @@ namespace BeARAT.Common
         public byte[] Hash { get; } // Sha 256 hash based on the current date time
         private int Timeout { get; set; } = 200;
 
-        Socket socket;
-        StreamReader reader;
-        StreamWriter writer;
+        TcpClient client;
+        BinaryReader reader;
+        BinaryWriter writer;
 
-        public Peer(Socket sock) {
-            socket = sock;
+        public Peer(TcpClient client) {
+            this.client = client;
 
             Hash = Common.Hash.GetHashSha256(DateTime.Now.ToBinary());
             string hashString = Common.Hash.Hash2String(Hash);
-            Name = hashString.Substring(hashString.Length - 32);
+            Name = hashString.Substring(hashString.Length - 16);
 
-            Stream stream = new NetworkStream(socket);
-            reader = new StreamReader(stream);
-            writer = new StreamWriter(stream);
+            Stream stream = this.client.GetStream();
+            reader = new BinaryReader(stream);
+            writer = new BinaryWriter(stream);
         }
 
         public void Send(string data)
         {
-            writer.WriteLine(data);
+            writer.Write(data);
             writer.Flush();
         }
 
         public string Receive()
         {
             string data;
-            data = reader.ReadLine();
+
+            try
+            {
+                data = reader.ReadString();
+            }
+            catch (IOException)
+            {
+                throw;
+            }
+            
             return data;
         }
 
         public bool IsAlive()
         {
-            return socket.Connected;
+            return client.Connected;
         }
 
         public void Disconnect()
         {
-            this.socket.Disconnect(false);
-            this.socket.Close(Timeout);
+            this.client.Close();
         }
 
         public override string ToString()
         {
             String status = IsAlive() ? STATUS_CONNECTED : STATUS_DISCONNECTED;
-            return string.Format(FORMAT, Name, status, socket.ToString());
+            return string.Format(FORMAT, Name, status, this.client.ToString());
         }
     }
 }

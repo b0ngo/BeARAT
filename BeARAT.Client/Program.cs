@@ -12,16 +12,20 @@ namespace BeARAT.Client
         {
             try {
                 Common.IO.Console.Message("Connecting...");
-                TcpClient client = new TcpClient();
-                client.Connect("127.0.0.1", 8080);
+                TcpClient client = new TcpClient("localhost", 8080);
+                
+                //client.Connect("127.0.0.1", 8080);
                 Common.IO.Console.Message("Connected");
 
-                string data = "Testdata with some spaces...";
+                string data = "Hello";
 
-                ASCIIEncoding asen = new ASCIIEncoding();
-                StreamWriter writer = new StreamWriter(client.GetStream());
-                writer.WriteLine(data);
-                writer.Flush();
+                NetworkStream stream = client.GetStream();
+                BinaryWriter w = new BinaryWriter(stream);
+                w.Write(data);
+                w.Flush();
+                Common.IO.Console.Message("Send:     " + data);
+                string response = new BinaryReader(stream).ReadString();
+                Common.IO.Console.Message("Received: " + response);
 
             } catch (Exception e) {
                 Common.IO.Console.Error(e);

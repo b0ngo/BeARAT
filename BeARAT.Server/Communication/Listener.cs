@@ -29,16 +29,16 @@ namespace BeARAT.Server
             Common.IO.Console.Message(String.Format(INFO_LISTENING, this.IPAddr.ToString(), this.Port));
 
             while (IsRunning) {
-                Socket sock = listener.AcceptSocket();
-                ConnectClient(sock);
+                TcpClient newConnectedClient = listener.AcceptTcpClient();
+                ConnectClient(newConnectedClient);
             }
         }
 
-        private void ConnectClient(Socket sock)
+        private void ConnectClient(TcpClient client)
         {
-            Peer p = new Peer(sock);
+            Peer p = new Peer(client);
             Server.Model.PeerMgr.AddPeer(p);
-            Common.IO.Console.Message(p.ToString());
+            Common.IO.Console.Message(String.Format(INFO_PEER_CONNECTED, p.ToString()));
         }
     }
 }

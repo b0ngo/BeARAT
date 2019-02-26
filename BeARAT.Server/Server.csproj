@@ -53,13 +53,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BeARATLib\Common.csproj">
+    <ProjectReference Include="..\BeARAT.Common\Common.csproj">
       <Project>{a89e877a-de1f-42dc-be9b-7686a1983f40}</Project>
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Server\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

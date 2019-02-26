@@ -25,21 +25,15 @@ namespace BeARAT.Common.IO
         public static void Print(Flag f, string msg) {
             StringBuilder strBuilder = new StringBuilder();
 
-            if(VERBOSE_LEVEL == 0) {
+            strBuilder.Append(FlagToString(f));
+            strBuilder.Append(' ');
+            strBuilder.Append(msg);
+
+            bool skipPrint = VERBOSE_LEVEL == 0;
+            skipPrint = skipPrint || (VERBOSE_LEVEL == 1 && Flag.DEBUG.Equals(f));
+
+            if (skipPrint)
                 return;
-            }
-
-            if(VERBOSE_LEVEL == 1 && f != Flag.DEBUG) {
-                strBuilder.Append(FlagToString(f));
-                strBuilder.Append(' ');
-                strBuilder.Append(msg);
-            }
-
-            if(VERBOSE_LEVEL == 2 && f == Flag.DEBUG) {
-                strBuilder.Append(FlagToString(f));
-                strBuilder.Append(' ');
-                strBuilder.Append(msg);
-            }
 
             Print(strBuilder.ToString());
         }
