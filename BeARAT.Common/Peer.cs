@@ -39,16 +39,7 @@ namespace BeARAT.Common
         public string Receive()
         {
             string data;
-
-            try
-            {
-                data = reader.ReadString();
-            }
-            catch (IOException)
-            {
-                throw;
-            }
-            
+            data = reader.ReadString();
             return data;
         }
 

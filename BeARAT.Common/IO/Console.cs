@@ -22,6 +22,8 @@ namespace BeARAT.Common.IO
         private static string FLAG_ERROR = "[ERR]";
         private static string FLAG_DEBUG = "[ > ]";
 
+        private static string PROMPT = "> ";
+
         public static void Print(Flag f, string msg) {
             StringBuilder strBuilder = new StringBuilder();
 
@@ -51,18 +53,18 @@ namespace BeARAT.Common.IO
         public static void Error(Exception e)
         {
             Print(Flag.ERROR, e.Message);
-            Debug(e.Source);
-
-            string[] stacktrace = e.StackTrace.Split(LF.ToCharArray());
-
-            for(int i = 0; i < stacktrace.Length; i++) {
-                Debug(stacktrace[i]);
-            }
+            Debug(e.StackTrace.ToString());
         }
 
         public static void Debug(string msg)
         {
             Print(Flag.DEBUG, msg);
+        }
+
+        public static string ReadLine()
+        {
+            System.Console.Write(PROMPT);
+            return System.Console.ReadLine();
         }
 
         private static void Print(string line)

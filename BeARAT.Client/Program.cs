@@ -12,7 +12,7 @@ namespace BeARAT.Client
         {
             try {
                 Common.IO.Console.Message("Connecting...");
-                TcpClient client = new TcpClient("localhost", 8080);
+                TcpClient client = new TcpClient("localhost", 8085);
                 
                 //client.Connect("127.0.0.1", 8080);
                 Common.IO.Console.Message("Connected");
