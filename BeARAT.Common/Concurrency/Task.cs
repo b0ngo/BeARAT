@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BeARAT.Common
+namespace BeARAT.Common.Concurrency
 {
     public abstract class Task
     {
@@ -17,15 +17,20 @@ namespace BeARAT.Common
         protected Thread thread;
         protected int Timeout { get; set; } = 200;
 
+        private string name;
+
         public Task(string name)
         {
-            thread = new Thread(new ThreadStart(Run)) {
-                Name = name
-            };
+            this.name = name;
         }
 
         public void Start()
         {
+            thread = new Thread(new ThreadStart(Run))
+            {
+                Name = this.name
+            };
+
             thread.Start();
             Common.IO.Console.Message(String.Format(INFO_STARTED, thread.Name));
         }

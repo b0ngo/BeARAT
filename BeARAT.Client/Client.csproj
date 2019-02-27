@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Execs\CommandPrompt.cs" />
+    <Compile Include="Execs\Powershell.cs" />
+    <Compile Include="Execs\Shell.cs" />
     <Compile Include="IO\NetInputHandler.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />

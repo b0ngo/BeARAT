@@ -1,18 +1,20 @@
 ﻿using BeARAT.Common.IO.Net;
+using BeARAT.Common.Concurrency;
 
 using System;
 using System.IO;
 
 namespace BeARAT.Common.IO.Net
 {
-    public class PeerListener : Common.Task
+    public class PeerListener : Task
     {
         private const string CONNECTION_CLOSED = "Connection {0} was closed.";
+        private const string FORMAT_LISTENER = "Listener {0}";
 
         private Peer peer;
         private IInputHandler iHandler;
 
-        public PeerListener(Peer peer, IInputHandler handler) : base(peer.Name)
+        public PeerListener(Peer peer, IInputHandler handler) : base(String.Format(FORMAT_LISTENER, peer.Name))
         {
             this.peer = peer;
             this.iHandler = handler;

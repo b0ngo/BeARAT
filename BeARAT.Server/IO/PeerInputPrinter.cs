@@ -27,7 +27,7 @@ namespace BeARAT.Common.IO
             }
             else
             {
-                Common.IO.Console.Debug(String.Format(FORMAT, peer.ToString(), input));
+                Common.IO.Console.Message(String.Format(FORMAT, peer.ToString(), input));
             }
         }
     }

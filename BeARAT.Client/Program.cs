@@ -12,14 +12,13 @@ namespace BeARAT.Client
 
         private static PeerListener listener;
 
-        private static NetworkStream stream;
-        private static BinaryReader reader;
-        private static BinaryWriter writer;
-
         public static void Main(string[] args)
         {
             string host;
             int port;
+
+            // activate debug mode
+            Common.IO.Console.VERBOSE_LEVEL = 2;
 
             try
             {
@@ -49,6 +48,9 @@ namespace BeARAT.Client
             NetInputHandler iHandler = new NetInputHandler();
             listener = new PeerListener(peer, iHandler);
             listener.Start();
+
+            Model.Peer = peer;
+            Model.Listener = listener;
         }
     }
 }

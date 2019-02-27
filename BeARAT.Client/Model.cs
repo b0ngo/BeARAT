@@ -9,6 +9,7 @@ namespace BeARAT.Client
 {
     static class Model
     {
-        public static PeerListener listener { get; set; }
+        public static PeerListener Listener { get; set; }
+        public static Peer Peer { get; set; }
     }
 }
