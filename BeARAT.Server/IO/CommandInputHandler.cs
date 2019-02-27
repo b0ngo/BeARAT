@@ -11,6 +11,7 @@ namespace BeARAT.Server.IO
 
         private const string CMD_SET_SESSION = "session";
         private const string CMD_SHOW_SESSION = "sessions";
+        private const string CMD_EXIT = "exit";
 
         private string[] cmd;
 
@@ -27,6 +28,9 @@ namespace BeARAT.Server.IO
             {
                 switch (cmd[0])
                 {
+                    case CMD_EXIT:
+                        Program.Shutdown();
+                        break;
                     case CMD_SET_SESSION:
                         SetSession();
                         break;

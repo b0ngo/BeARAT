@@ -48,9 +48,21 @@ namespace BeARAT.Common
             return client.Connected;
         }
 
-        public void Disconnect()
+        public void Close()
         {
-            this.client.Close();
+            try
+            {
+                this.reader.Close();
+                this.writer.Close();
+                this.client.GetStream().Close();
+            } catch (InvalidOperationException)
+            {
+                // nothing to do; expected behaviour in case of an already closed stream.
+            }
+            finally
+            {
+                this.client.Close();
+            }
         }
 
         public override string ToString()

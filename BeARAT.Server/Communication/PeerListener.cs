@@ -1,6 +1,7 @@
 ﻿using BeARAT.Common;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace BeARAT.Server.Communication
     {
         private const string FORMAT = "{0}: {1}";
         private const string NULL = "<NULL>";
+        private const string CONNECTION_CLOSED = "Connection {0} was closed.";
+
         private Peer peer;
 
         public PeerListener(Peer peer) : base(peer.Name)
@@ -21,13 +24,25 @@ namespace BeARAT.Server.Communication
         protected override void Run()
         {
             while (peer.IsAlive()) {
-                string receivedData = peer.Receive();
+                string receivedData = "";
 
-                if(receivedData == null || receivedData == "") {
-                    Common.IO.Console.Warning(String.Format(FORMAT, peer.ToString(), NULL));
+                try
+                {
+                    receivedData += peer.Receive();
+
+                    if (receivedData == null || receivedData == "")
+                    {
+                        Common.IO.Console.Warning(String.Format(FORMAT, peer.ToString(), NULL));
+                    }
+                    else
+                    {
+                        Common.IO.Console.Debug(String.Format(FORMAT, peer.ToString(), receivedData));
+                    }
                 }
-                else {
-                    Common.IO.Console.Debug(String.Format(FORMAT, peer.ToString(), receivedData));
+                catch (IOException e)
+                {
+                    peer.Close();
+                    Common.IO.Console.Warning(String.Format(CONNECTION_CLOSED, peer.ToString()));
                 }
             }
         }

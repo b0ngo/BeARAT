@@ -21,11 +21,17 @@ namespace BeARAT.Client
 
                 NetworkStream stream = client.GetStream();
                 BinaryWriter w = new BinaryWriter(stream);
+                BinaryReader r = new BinaryReader(stream);
                 w.Write(data);
                 w.Flush();
                 Common.IO.Console.Message("Send:     " + data);
                 string response = new BinaryReader(stream).ReadString();
                 Common.IO.Console.Message("Received: " + response);
+
+                w.Close();
+                r.Close();
+                stream.Close();
+                client.Close();
 
             } catch (Exception e) {
                 Common.IO.Console.Error(e);

@@ -29,8 +29,20 @@ namespace BeARAT.Server
             Common.IO.Console.Message(String.Format(INFO_LISTENING, this.IPAddr.ToString(), this.Port));
 
             while (IsRunning) {
-                TcpClient newConnectedClient = listener.AcceptTcpClient();
-                ConnectClient(newConnectedClient);
+                if (!listener.Pending())
+                {
+                    System.Threading.Thread.Sleep(500);
+                    continue;
+                }
+
+                try
+                {
+                    TcpClient newConnectedClient = listener.AcceptTcpClient();
+                    ConnectClient(newConnectedClient);
+                } catch (Exception e)
+                {
+                    Common.IO.Console.Error(e);
+                }
             }
         }
 

@@ -19,6 +19,9 @@ namespace BeARAT.Server
             Peers.Add(peer);
             PeerListener listener = new PeerListener(peer);
             listener.Start();
+
+            if(Peers.Count == 1)
+                SessionIndex = 0;
         }
 
         public Peer GetPeer()

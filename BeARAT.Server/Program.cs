@@ -20,11 +20,19 @@ namespace BeARAT.Server
             // Start listener for new clients
             IPAddress ipAddr = IPAddress.Parse(IP);
             Listener server = new Listener(SERVER_NAME, ipAddr, PORT);
+            Model.Listener = server;
             server.Start();
 
             // Start listener for user input
             UserInputListener uiListener = new UserInputListener(new IO.CommandInputHandler());
             uiListener.Start();
+            Model.UserInputListener = uiListener;
+        }
+
+        public static void Shutdown()
+        {
+            Model.Listener.Stop();
+            Model.UserInputListener.Stop();
         }
     }
 }
