@@ -1,8 +1,9 @@
-﻿using BeARAT.Server.Communication;
-using BeARAT.Common;
+﻿using BeARAT.Common;
 using System.Collections.Generic;
+using BeARAT.Common.IO.Net;
+using BeARAT.Common.IO;
 
-namespace BeARAT.Server
+namespace BeARAT.Server.IO.Net
 {
     class PeerManager
     {
@@ -17,7 +18,8 @@ namespace BeARAT.Server
         public void AddPeer(Peer peer)
         {
             Peers.Add(peer);
-            PeerListener listener = new PeerListener(peer);
+            PeerInputPrinter printer = new PeerInputPrinter(peer);
+            PeerListener listener = new PeerListener(peer, printer);
             listener.Start();
 
             if(Peers.Count == 1)

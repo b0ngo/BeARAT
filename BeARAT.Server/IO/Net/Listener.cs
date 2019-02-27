@@ -3,8 +3,9 @@ using System.Net;
 using System.Net.Sockets;
 
 using BeARAT.Common;
+using BeARAT.Common.IO.Net;
 
-namespace BeARAT.Server
+namespace BeARAT.Server.IO.Net
 {
     class Listener : Task
     {

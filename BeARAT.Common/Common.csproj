@@ -44,8 +44,9 @@
     <Compile Include="Hash.cs" />
     <Compile Include="IO\Console.cs" />
     <Compile Include="IO\IInputHandler.cs" />
+    <Compile Include="IO\Net\PeerListener.cs" />
     <Compile Include="IO\UserInputListener.cs" />
-    <Compile Include="Peer.cs" />
+    <Compile Include="IO\Net\Peer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

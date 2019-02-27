@@ -1,41 +1,54 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
-using System.Text;
-using BeARAT.Common;
+using BeARAT.Client.IO;
+using BeARAT.Common.IO.Net;
 
 namespace BeARAT.Client
 {
     class Program
     {
-        public static void Main()
+        private const string INVALID_SETUP = "Invalid usage of the client";
+
+        private static PeerListener listener;
+
+        private static NetworkStream stream;
+        private static BinaryReader reader;
+        private static BinaryWriter writer;
+
+        public static void Main(string[] args)
         {
+            string host;
+            int port;
+
+            try
+            {
+                host = args[0];
+                port = int.Parse(args[1]);
+            } catch(Exception)
+            {
+                Common.IO.Console.Warning(INVALID_SETUP);
+                return;
+            }
+
             try {
-                Common.IO.Console.Message("Connecting...");
-                TcpClient client = new TcpClient("localhost", 8085);
-                
-                //client.Connect("127.0.0.1", 8080);
-                Common.IO.Console.Message("Connected");
-
-                string data = "Hello";
-
-                NetworkStream stream = client.GetStream();
-                BinaryWriter w = new BinaryWriter(stream);
-                BinaryReader r = new BinaryReader(stream);
-                w.Write(data);
-                w.Flush();
-                Common.IO.Console.Message("Send:     " + data);
-                string response = new BinaryReader(stream).ReadString();
-                Common.IO.Console.Message("Received: " + response);
-
-                w.Close();
-                r.Close();
-                stream.Close();
-                client.Close();
+                setup(host, port);
 
             } catch (Exception e) {
                 Common.IO.Console.Error(e);
             }
+        }
+
+        private static void setup(string host, int port)
+        {
+            Common.IO.Console.Message("Connecting...");
+            TcpClient client = new TcpClient(host, port);
+            Common.IO.Console.Message("Connected");
+
+            Peer peer = new Peer(client);
+            NetInputHandler iHandler = new NetInputHandler();
+            listener = new PeerListener(peer, iHandler);
+            listener.Start();
         }
     }
 }

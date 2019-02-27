@@ -1,8 +1,7 @@
 ﻿using BeARAT.Common.IO;
+using BeARAT.Server.IO.Net;
 using System;
-using System.IO;
 using System.Net;
-using System.Net.Sockets;
 
 namespace BeARAT.Server
 {
@@ -10,12 +9,12 @@ namespace BeARAT.Server
     {
         private const string SERVER_NAME = "Server";
         private const string IP = "127.0.0.1";
-        private const int PORT = 8085;
+        private const int PORT = 8080;
 
         public static void Main(String[] args)
         {
             // Activate debug mode in console output
-            Common.IO.Console.VERBOSE_LEVEL = 2;
+            //Common.IO.Console.VERBOSE_LEVEL = 2;
 
             // Start listener for new clients
             IPAddress ipAddr = IPAddress.Parse(IP);

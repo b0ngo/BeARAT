@@ -43,11 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\CommandInputHandler.cs" />
+    <Compile Include="IO\PeerInputPrinter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Communication\Listener.cs" />
-    <Compile Include="Communication\PeerListener.cs" />
+    <Compile Include="IO\Net\Listener.cs" />
     <Compile Include="Model.cs" />
-    <Compile Include="Communication\PeerManager.cs" />
+    <Compile Include="IO\Net\PeerManager.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
-﻿using BeARAT.Common;
-using BeARAT.Common.IO;
+﻿using BeARAT.Common.IO;
+using BeARAT.Common.IO.Net;
 using System;
+using System.IO;
 using System.Text;
 
 namespace BeARAT.Server.IO
@@ -41,7 +42,7 @@ namespace BeARAT.Server.IO
                         Send();
                         break;
                 }
-            } catch(ArgumentException e)
+            } catch(Exception e)
             {
                 Common.IO.Console.Error(e);
             }

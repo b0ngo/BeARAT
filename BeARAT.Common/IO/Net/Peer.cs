@@ -2,13 +2,15 @@
 using System.IO;
 using System.Net.Sockets;
 
-namespace BeARAT.Common
+namespace BeARAT.Common.IO.Net
 {
     public class Peer
     {
         private const string FORMAT = "Peer {0} ({1}) {2}";
         private const string STATUS_CONNECTED = "connected";
         private const string STATUS_DISCONNECTED = "closed";
+
+        private const string EXCEPTION_NOT_ALIVE = "The connection of the client {0} is closed.";
 
         public string Name { get; set; } // by default the last 32 characters of the hash
         public byte[] Hash { get; } // Sha 256 hash based on the current date time
@@ -32,6 +34,9 @@ namespace BeARAT.Common
 
         public void Send(string data)
         {
+            if (!IsAlive())
+                throw new IOException(String.Format(EXCEPTION_NOT_ALIVE, this.Name));
+
             writer.Write(data);
             writer.Flush();
         }

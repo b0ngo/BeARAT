@@ -22,7 +22,8 @@ namespace BeARAT.Common.IO
         private static string FLAG_ERROR = "[ERR]";
         private static string FLAG_DEBUG = "[ > ]";
 
-        private static string PROMPT = "> ";
+        //private static string PROMPT = "> ";
+        private static string PROMPT = "";
 
         public static void Print(Flag f, string msg) {
             StringBuilder strBuilder = new StringBuilder();
