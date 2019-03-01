@@ -47,6 +47,16 @@ namespace BeARAT.Common.Concurrency
             }
         }
 
+        public override string ToString()
+        {
+            string stringRep;
+            if (this.thread != null)
+                stringRep = this.thread.ToString();
+            else
+                stringRep = this.name;
+            return stringRep;
+        }
+
         protected abstract void Run();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BeARAT.Client.Execs;
 using BeARAT.Common.IO;
+using BeARAT.Common.Concurrency;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,14 @@ namespace BeARAT.Client.IO
 {
     class NetInputHandler : IInputHandler
     {
+        private const string SET_SHELL = "Used shell: {0}";
         private const int SLEEP_INTERVAL = 50;
 
         Shell sh;
 
         public NetInputHandler()
         {
-            sh = new CommandPrompt();
+            SetShell(new CommandPrompt());
         }
 
         public void Handle(string input)
@@ -37,6 +39,13 @@ namespace BeARAT.Client.IO
             {
                 System.Threading.Thread.Sleep(SLEEP_INTERVAL);
             }
+        }
+
+        public void SetShell(Shell sh)
+        {
+            this.sh = sh;
+            Common.Concurrency.Task t = (Common.Concurrency.Task) this.sh;
+            Common.IO.Console.Debug(String.Format(SET_SHELL, t.ToString()));
         }
     }
 }

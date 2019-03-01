@@ -22,6 +22,11 @@ namespace BeARAT.Server
             Model.Listener = server;
             server.Start();
 
+            // Start message queue handler for sending data
+            MessageQueueHandler mqh = new MessageQueueHandler(MessageQueueHandler.INTERVAL);
+            Model.MessageQueueHandler = mqh;
+            mqh.Start();
+
             // Start listener for user input
             UserInputListener uiListener = new UserInputListener(new IO.CommandInputHandler());
             uiListener.Start();

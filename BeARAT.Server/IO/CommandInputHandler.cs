@@ -1,5 +1,6 @@
 ﻿using BeARAT.Common.IO;
 using BeARAT.Common.IO.Net;
+using BeARAT.Server.IO.Net;
 using System;
 using System.IO;
 using System.Text;
@@ -76,7 +77,7 @@ namespace BeARAT.Server.IO
             for (int i = 0; i < Model.PeerMgr.GetPeerSize(); i++)
             {
                 Peer p = Model.PeerMgr.GetPeer(i);
-                string active = p.Equals(Model.PeerMgr.GetPeer(i)) ? "(*)" : "   ";
+                string active = p.Equals(Model.PeerMgr.GetPeer()) ? "(*)" : "   ";
                 string connected = p.IsAlive() ? "(*)" : "   ";
                 string line = string.Format(format, i, active, connected, p.Hash, p.Name);
                 Common.IO.Console.Message(line);
@@ -91,8 +92,8 @@ namespace BeARAT.Server.IO
                 bld.Append(cmd[i]);
                 bld.Append(" ");
             }
-
-            Model.PeerMgr.GetPeer().Send(bld.ToString());
+            
+            MessageQueueHandler.AddMessage(Model.PeerMgr.GetPeer(), bld.ToString());
         }
     }
 }

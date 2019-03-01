@@ -18,11 +18,6 @@ namespace BeARAT.Client.Execs
         public abstract void Execute();
         public abstract new bool IsRunning();
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
-
         public override bool Equals(object obj)
         {
             return base.Equals(obj);
@@ -36,6 +31,7 @@ namespace BeARAT.Client.Execs
         protected override void Run()
         {
             this.Execute();
+            this.Stop();
         }
     }
 }
